@@ -269,25 +269,25 @@ class DocumentScannerGUI:
         text_area = scrolledtext.ScrolledText(result_window, wrap=tk.WORD)
         text_area.pack(expand=True, fill="both", padx=10, pady=10)
 
-        text_area.insert(tk.END, "== Matching Phrases ==\n")
+        text_area.insert(tk.END, "--- Matching Phrases ---\n")
         for match in matches:
             text_area.insert(tk.END, f"- {match}\n")
 
-        text_area.insert(tk.END, f"\n== Compression Ratios ==\n")
+        text_area.insert(tk.END, f"\n--- Compression Ratios ---\n")
         text_area.insert(tk.END, f"Document 1: {ratio1:.2f}\n")
         text_area.insert(tk.END, f"Document 2: {ratio2:.2f}\n")
 
-        text_area.insert(tk.END, "\n== BFS Traversal ==\n")
+        text_area.insert(tk.END, "\n--- BFS Traversal ---\n")
         text_area.insert(tk.END, " -> ".join(bfs_result) + "\n")
 
-        text_area.insert(tk.END, "\n== DFS Traversal ==\n")
+        text_area.insert(tk.END, "\n--- DFS Traversal ---\n")
         text_area.insert(tk.END, " -> ".join(dfs_result) + "\n")
 
-        text_area.insert(tk.END, "\n== Sorted Metadata by Author ==\n")
+        text_area.insert(tk.END, "\n--- Sorted Metadata by Author ---\n")
         for doc in sorted_metadata:
             text_area.insert(tk.END, f"Author: {doc['author']}, Title: {doc['title']}, Date: {doc['date']}\n")
 
-        text_area.insert(tk.END, "\n== Prioritized Phrases ==\n")
+        text_area.insert(tk.END, "\n--- Prioritized Phrases ---\n")
         for phrase in prioritized_phrases:
             text_area.insert(tk.END, f"- {phrase}\n")
 
