@@ -1,4 +1,4 @@
 date: 2025-04-30 
-
+author: Cassie Dillion
 title: Artificial Intelligence
 Artificial intelligence and machine learning are revolutionizing healthcare. Machine learning algorithms are used in predicting diseases and recommending the right treatments. By analyzing patient data, AI can uncover hidden health risks. The use of machine learning in healthcare has expanded rapidly over the past decade.
