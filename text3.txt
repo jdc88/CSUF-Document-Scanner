@@ -1,0 +1,4 @@
+date: 2025-04-30  
+author: Daniel Smith  
+title: AI in Healthcare  
+Artificial intelligence and its subset, machine learning, are transforming the healthcare industry. These technologies assist in disease prediction and suggesting appropriate treatments. By examining patient health data, AI can reveal previously unnoticed risks. Over the last ten years, the use of AI in healthcare has grown significantly.
