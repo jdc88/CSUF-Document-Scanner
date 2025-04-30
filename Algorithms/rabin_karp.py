@@ -28,8 +28,8 @@ def rabin_karp(text, pattern, q = 101): # Prime number is hard-coded at 101)
     return positions
 
 # Example Input
-text = "Hello World, this is Computer Science !!!"
-pattern = "Computer"
+#text = "Hello World, this is Computer Science !!!"
+#pattern = "Computer"
 
 # Output
-print("Rabin Karp Pattern found at: ", rabin_karp(text, pattern))
+#print("Rabin Karp Pattern found at: ", rabin_karp(text, pattern))

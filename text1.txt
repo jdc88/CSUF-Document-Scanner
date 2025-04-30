@@ -1,1 +1,4 @@
+date: 2025-04-30 
+author: Alice Bob
+title: Machine Learning
 Machine learning is a subset of artificial intelligence that involves the study of algorithms. It is used in healthcare for predicting diseases and recommending treatments. By analyzing medical records, machine learning can help identify potential health risks. In recent years, machine learning has seen a rapid growth in its applications.

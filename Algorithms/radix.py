@@ -39,11 +39,11 @@ def radix_sort(arr):
     return arr
 
 #Generate a random list of numbers
-random_list = [random.randint(10, 9999) for _ in range(10)]
+#random_list = [random.randint(10, 9999) for _ in range(10)]
 
-print("Original Array:", random_list)
-sorted_arr = radix_sort(random_list)
-print("Sorted array:", sorted_arr)
+#print("Original Array:", random_list)
+#sorted_arr = radix_sort(random_list)
+#print("Sorted array:", sorted_arr)
 
 
 
