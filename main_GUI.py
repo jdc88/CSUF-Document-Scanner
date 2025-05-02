@@ -300,8 +300,12 @@
 
 # FINAL VERSION 5/1/25
 
-
 import tkinter as tk
+#------ citation graphs
+import re
+import networkx as nx
+import matplotlib.pyplot as plt
+#------
 from tkinter import filedialog, messagebox, scrolledtext
 from read_file_logic import read_file
 from Algorithms.huffman_encoding import encode_text
@@ -309,41 +313,36 @@ from Algorithms.rabin_karp import rabin_karp
 from Algorithms.bfs import bfs
 from Algorithms.dfs import dfs
 from Algorithms.radix import counting_sort
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from PIL import Image, ImageTk
+
 
 class DocumentScannerGUI:
     def __init__(self):
-        
-        # Create main window
         self.root = tk.Tk()
         self.root.title("Document Scanner")
         self.root.geometry("700x600")
         self.root.configure(bg="#1f2c33")
 
-        # Initialize variables
         self.file1_content = None
         self.file2_content = None
-        self.metadata = []  # List of dictionaries containing metadata
-        self.graph = {}     # Graph for BFS and DFS
+        self.metadata = []
+        self.graph = {}
 
-        # Title label
         tk.Label(self.root, text="Document Scanner Tool", font=("Helvetica", 18, "bold"),
                  bg="#1f2c33", fg="white").pack(pady=20)
 
-        # Frame for fil e upload buttons
         button_frame = tk.Frame(self.root, bg="#1f2c33")
         button_frame.pack(pady=10)
 
-        # Upload button
         tk.Button(button_frame, text="Upload Document 1", command=self.upload_file1,
                   bg="#3498db", fg="white", width=20, font=("Helvetica", 11)).grid(row=0, column=0, padx=10, pady=5)
         tk.Button(button_frame, text="Upload Document 2", command=self.upload_file2,
                   bg="#2ecc71", fg="white", width=20, font=("Helvetica", 11)).grid(row=0, column=1, padx=10, pady=5)
 
-        # Analyze button
         tk.Button(self.root, text="Analyze Documents", command=self.analyze_documents,
                   bg="#e67e22", fg="white", width=25, font=("Helvetica", 12, "bold")).pack(pady=20)
 
-    # File upload logic for Document 1
     def upload_file1(self):
         path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
         if path:
@@ -352,7 +351,6 @@ class DocumentScannerGUI:
             self.metadata.append(meta)
             messagebox.showinfo("Success", "Document 1 loaded.")
 
-    # upload logic for Doc 2
     def upload_file2(self):
         path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
         if path:
@@ -361,51 +359,61 @@ class DocumentScannerGUI:
             self.metadata.append(meta)
             messagebox.showinfo("Success", "Document 2 loaded.")
 
-    # Analyze both uploaded documents
     def analyze_documents(self):
         if not self.file1_content or not self.file2_content:
             messagebox.showerror("Error", "Please upload both documents first.")
             return
 
-        # Find similar phrases
         matches = self.find_matches()
-
-        # Compress both documents using Huffman Encoding
         encoded_text1, _ = encode_text(self.file1_content)
         encoded_text2, _ = encode_text(self.file2_content)
 
-        # Compute compression ratios
         compression_ratio1 = len(encoded_text1) / (len(self.file1_content) * 8)
         compression_ratio2 = len(encoded_text2) / (len(self.file2_content) * 8)
 
-        # Build simple directed graph for traver sal
         self.build_graph()
         bfs_result = bfs(self.graph, "Document 1")
         dfs_result = dfs(self.graph, "Document 1")
 
-        # Sort document metadata alphabetically by author
         sorted_metadata = sorted(self.metadata, key=lambda x: x['author'])
-
-        # Select top 5 longest matching phrases
         prioritized_phrases = self.prioritize_phrases(matches)
 
-        # Show results in a new GUI window
-        self.show_results(matches, compression_ratio1, compression_ratio2, bfs_result, dfs_result, sorted_metadata, prioritized_phrases)
+        similarity_percent = self.calculate_similarity(matches)
 
-    #Find 3-word phrases matches using Rabin carp alg
+        self.show_results(matches, compression_ratio1, compression_ratio2,
+                          bfs_result, dfs_result, sorted_metadata,
+                          prioritized_phrases, similarity_percent)
+
+        # Citation graph
+        docs_with_authors = {}
+        for i, content in enumerate([self.file1_content, self.file2_content]):
+            meta = self.metadata[i]
+            author = meta["author"]
+            cited_authors = self.extract_citations(content)
+            docs_with_authors[author] = cited_authors
+
+        citation_graph = self.build_citation_graph(docs_with_authors)
+        self.visualize_graph(citation_graph)
+
+        # Visualize similarity
+        self.visualize_similarity(similarity_percent)
+
     def find_matches(self):
         matches = []
         words1 = self.file1_content.split()
-        words2 = self.file2_content.split()
-
-        for i in range(len(words1)):
-            phrase = ' '.join(words1[i:i+3])
-            if phrase and len(phrase.split()) == 3:
-                if rabin_karp(self.file2_content, phrase):
-                    matches.append(phrase)
+        for i in range(len(words1) - 2):
+            phrase = ' '.join(words1[i:i + 3])
+            if rabin_karp(self.file2_content, phrase):
+                matches.append(phrase)
         return matches
 
-    #Extract the metadata (author, title, date etc) 
+    def calculate_similarity(self, matches):
+        phrases1 = set([' '.join(self.file1_content.split()[i:i+3]) for i in range(len(self.file1_content.split()) - 2)])
+        phrases2 = set([' '.join(self.file2_content.split()[i:i+3]) for i in range(len(self.file2_content.split()) - 2)])
+        total_phrases = len(phrases1.union(phrases2))
+        match_count = len(set(matches))
+        return (match_count / total_phrases) * 100 if total_phrases else 0
+
     def extract_metadata(self, content):
         lines = content.splitlines()
         meta = {"author": "Unknown", "title": "Unknown", "date": "Unknown"}
@@ -418,20 +426,17 @@ class DocumentScannerGUI:
                 meta["date"] = line.split(":", 1)[1].strip()
         return meta
 
-    #Build simple graph representation for traversal  
     def build_graph(self):
         self.graph = {
             "Document 1": ["Document 2"],
             "Document 2": []
         }
 
-    #   Prioritize longest matching phrases 
     def prioritize_phrases(self, phrases, k=5):
         scored_phrases = sorted(phrases, key=lambda p: -len(p))
         return scored_phrases[:k]
 
-    # Display all of the analysis results in a new popup  window
-    def show_results(self, matches, ratio1, ratio2, bfs_result, dfs_result, sorted_metadata, prioritized_phrases):
+    def show_results(self, matches, ratio1, ratio2, bfs_result, dfs_result, sorted_metadata, prioritized_phrases, similarity_percent):
         result_window = tk.Toplevel(self.root)
         result_window.title("Results")
         result_window.geometry("700x600")
@@ -440,39 +445,82 @@ class DocumentScannerGUI:
         text_area = scrolledtext.ScrolledText(result_window, wrap=tk.WORD, font=("Courier", 10))
         text_area.pack(expand=True, fill="both", padx=10, pady=10)
 
-        # Matching phrases  
         text_area.insert(tk.END, "--- Matching Phrases ---\n")
         for match in matches:
             text_area.insert(tk.END, f"- {match}\n")
 
-        #Compression ratio
         text_area.insert(tk.END, f"\n--- Compression Ratios ---\n")
         text_area.insert(tk.END, f"Document 1: {ratio1:.2f}\n")
         text_area.insert(tk.END, f"Document 2: {ratio2:.2f}\n")
 
-        #BFs result  
+        text_area.insert(tk.END, f"\n--- Similarity Index ---\n")
+        text_area.insert(tk.END, f"{similarity_percent:.2f}%\n")
+
         text_area.insert(tk.END, "\n--- BFS Traversal ---\n")
         text_area.insert(tk.END, " -> ".join(bfs_result) + "\n")
 
-        # DFS result
         text_area.insert(tk.END, "\n--- DFS Traversal ---\n")
         text_area.insert(tk.END, " -> ".join(dfs_result) + "\n")
 
-        # Sorting the meta data
         text_area.insert(tk.END, "\n--- Sorted Metadata by Author ---\n")
         for doc in sorted_metadata:
             text_area.insert(tk.END, f"Author: {doc['author']}, Title: {doc['title']}, Date: {doc['date']}\n")
 
-        # Prioritized phrases
         text_area.insert(tk.END, "\n--- Prioritized Phrases ---\n")
         for phrase in prioritized_phrases:
             text_area.insert(tk.END, f"- {phrase}\n")
 
-        # Disable editing of results
         text_area.config(state="disabled")
 
-# Lauching it 
+    def extract_citations(self, text):
+        pattern = r"\b([A-Z][a-z]+(?: et al\.)?)\s*\(\d{4}\)"
+        return re.findall(pattern, text)
+
+    def build_citation_graph(self, docs_with_authors):
+        G = nx.DiGraph()
+        for author, cited_authors in docs_with_authors.items():
+            G.add_node(author)
+            for cited in cited_authors:
+                G.add_edge(author, cited)
+        return G
+
+    def visualize_graph(self, G, title="Citation Graph"):
+        graph_window = tk.Toplevel()
+        graph_window.title(title)
+        graph_window.geometry("800x600")
+        graph_window.configure(bg="#ffffff")
+
+        fig, ax = plt.subplots(figsize=(8, 6))
+        pos = nx.spring_layout(G)
+        nx.draw(G, pos, with_labels=True, node_color='lightgreen', node_size=2000, arrows=True, ax=ax)
+        ax.set_title(title)
+
+        canvas = FigureCanvasTkAgg(fig, master=graph_window)
+        canvas.draw()
+        canvas.get_tk_widget().pack(expand=True, fill="both")
+        plt.close(fig)
+
+    def visualize_similarity(self, similarity_percent):
+        graph_window = tk.Toplevel()
+        graph_window.title("Similarity Percentage")
+        graph_window.geometry("500x400")
+
+        fig, ax = plt.subplots(figsize=(5, 4))
+        categories = ['Similarity', 'Difference']
+        values = [similarity_percent, 100 - similarity_percent]
+        ax.bar(categories, values, color=['#27ae60', '#c0392b'])
+        ax.set_ylim(0, 100)
+        ax.set_ylabel('Percentage')
+        ax.set_title('Document Similarity Index')
+
+        canvas = FigureCanvasTkAgg(fig, master=graph_window)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill="both", expand=True)
+        plt.close(fig)
+
+
+# ----------------- Launch the GUI ------------------
+
 if __name__ == "__main__":
     gui = DocumentScannerGUI()
     gui.root.mainloop()
-
