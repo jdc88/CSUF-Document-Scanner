@@ -1,0 +1,60 @@
+Abstract
+The Abstract page should already include the page number. On the first line of the Abstract page, 
+center and bold the word “Abstract” (no italics, underlining, or quotation marks). Beginning with 
+the next line, write a concise summary of the key points of your research. (Do not indent.)
+Abstracts often provide an overview of the research topic, research questions, participants, 
+methods, results, data analysis, and conclusions. You may also include possible implications of
+your research and future work you see connected with your findings. The Abstract should be a
+single, double-spaced paragraph. The Abstract should be less than 250 words. A list of keywords
+from your paper generally follows the Abstract. To do this, indent as you would if starting a new
+paragraph, type “Keywords:” in italics, and then list the keywords. These keywords are intended 
+to be used in research databases to help readers find your work. Take a look at the example
+below. All of the above information was taken from the Purdue Online Writing Lab. 
+Keywords: APA, heading, citation, style, formatting
+
+With American Psychological Association (APA) style, the first heading should never be
+“Introduction.” Instead, the paper’s title should be used. It is assumed that the paper begins with 
+an introduction. The entire paper is to be double-spaced throughout. According to the 7th edition 
+of the Publication Manual of the American Psychological Association, the font should be
+accessible (i.e., easy to read) and consistent throughout the draft. Checking with your instructor
+about their requirements is always a good idea. The APA does recommend the following fonts:
+11-point Calibri, 11-point Arial, 10-point Lucida Sans Unicode, 12-point Times New Roman, 
+11-point Georgia, and 10-point Computer Modern. Margins should be 1” all around unless
+otherwise indicated by instructor. 
+This is a First-Level Heading with Bold Lettering
+The use of a first-level heading here indicates that your introduction has concluded, and 
+you are starting a new section of your paper. One of the most important aspects of APA style is
+in-text citation. In general, the author’s name and the year should be included, with a comma
+separating the two (Rogers, 1999). Remember that the period always comes after the citation to 
+enclose it with the sentence. When there are three or more authors, the first author’s last name is
+used, followed by, “et al.”, which means “and others” in Latin (Rogers et al., 2005). Note that 
+there is a period at the end of the phrase “et al.” Also, if the same source is used again in the 
+same paragraph, then the year may be omitted (Rogers et al.). However, this is only if both 
+citations are in the same paragraph.
+This is a Second-Level Heading with Bold Lettering
+According to Daniels (2009), the citation can also be put at the beginning of the sentence
+when the source is directly mentioned and does not need to be cited again at the end of the
+4
+sentence. In some cases, multiple sources are cited to support one point, in which case the 
+sources are separated by semicolons (Rogers et al., 2005; Nakachi, 2010). 
+This is a Third-Level Heading with Bold and Italicized Lettering
+In addition, according to Nakachi (2010), “whenever quoting or using quantitative data
+from a source, a page number is required” (p. 5). In this example, the author’s last name and year
+were mentioned at the beginning of the sentence, and the page number was placed at the end. 
+Rogers et al. (2005) discovered that 50% of students will forget to include page and paragraph 
+numbers when citing quantitative data (para. 3). The two rules to remember here are that the
+author’s name and year of publication should never be separated, and at the same time, the page
+number should always be at the end of a quote. If the author’s name is not used in the body of the
+sentence, the in-text citation “can also be set up so that all the information is at the end of the
+quote” (Nakachi, 2010, p. 6).
+
+References
+APA Style Introduction. (2021). Purdue Online Writing Lab. 
+https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_style_introduction.html
+Plath, S. (2000). The unabridged journals. (K. V. Kukil, Ed.). Anchor.
+Price, D. (2018, March 23). Laziness does not exist. Medium. 
+https://humanparts.medium.com/laziness-does-not-exist-3af27e312d01
+Rogers, J. T. (1999). Citation styles in scholarly research: Notations for various professions. 
+Journal of Citation, 1(2), 16-28.
+Rogers, A. H., Nakashita, G. H., & Chung, L. R. (2005). Why citation styles are important. 
+Journal of Citation, 5(10), 12-26.
