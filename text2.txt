@@ -1,4 +1,29 @@
-date: 2025-04-30 
-author: Cassie Dillion
-title: Artificial Intelligence
-Artificial intelligence and machine learning are revolutionizing healthcare. Machine learning algorithms are used in predicting diseases and recommending the right treatments. By analyzing patient data, AI can uncover hidden health risks. The use of machine learning in healthcare has expanded rapidly over the past decade.
+Author: kelly Johnson
+Title: Advances in Scalable Network Algorithms
+Date: 2020
+
+The demand for scalable network algorithms continues to grow alongside the rapid expansion of big data technologies and cloud-based infrastructure. As organizations generate increasingly large datasets, the need for efficient, reliable, and adaptable algorithms becomes more pressing than ever. One of the most well-established methods for identifying shortest paths in graph-based systems is Dijkstra’s algorithm. Introduced in the mid-20th century, it has remained a cornerstone in computer science due to its elegant structure and practical applications. Today, it still plays a fundamental role in both theoretical research and a wide range of computing environments, including networking, robotics, and geographic information systems (Smith, 2018).
+
+In modern distributed computing environments—particularly those that rely on decentralized resources like cloud platforms—it is crucial to implement algorithms that function effectively under asynchronous and non-deterministic execution models. These environments often lack synchronized clocks or centralized control, making traditional algorithms less effective without adaptation. Garcia (2019) highlighted the growing importance of parallelized graph traversal strategies that can take advantage of concurrent processing. By distributing workload across multiple processors or cores, systems can achieve substantial improvements in computation time and resource efficiency when analyzing massive-scale network topologies.
+
+Graph theory provides the theoretical backbone for many tools used in contemporary computing. Fundamental structures such as spanning trees, topological orderings, adjacency matrices, and connected components are vital not only in understanding graph behavior but also in solving real-world problems like task scheduling, dependency resolution, and traffic flow optimization. As noted by Lee (2017), these foundational elements are indispensable in building software systems that require stability and predictability. Building on this work, Johnson and Wu (2021) proposed new methods for modeling delay-tolerant networks using a series of modified traversal techniques. These methods allow systems to remain functional even when communication is intermittent or delayed, which is particularly useful in environments such as satellite communications or disaster recovery networks.
+
+Work by Thompson et al. (2015) explored the intricate relationship between graph density and the complexity of algorithmic execution. Their findings suggest that as the number of edges increases in proportion to nodes, computational costs can rise exponentially without optimizations. Nguyen et al. (2018) responded to these challenges by introducing heuristic approaches and approximation algorithms designed to minimize unnecessary computations. These techniques aim to preserve essential properties of the graph while reducing the overall workload, enabling more efficient runtime performance in real-world applications like social network analysis and supply chain logistics.
+
+Another key area of progress lies in GPU-based algorithm acceleration. Garcia (2019) conducted in-depth research into the use of CUDA for optimizing both breadth-first search (BFS) and depth-first search (DFS) operations on extremely large graphs. By offloading intensive computations to the GPU, systems can handle larger datasets with increased speed and responsiveness. While limitations such as memory throughput bottlenecks and thread contention remain active areas of concern, the measurable performance improvements make GPU acceleration a promising avenue for continued research and practical deployment.
+
+Looking toward the future, the field of network algorithm design will likely be shaped by the fusion of deterministic logic and probabilistic modeling. These hybrid approaches can offer flexibility in handling incomplete data, fluctuating network conditions, and evolving topologies (Smith, 2018). As real-time data analytics, autonomous platforms, and intelligent decision-making systems become more prevalent, the demand for algorithms that are not only fast and accurate but also robust and adaptable will continue to rise. Ensuring that algorithmic development keeps pace with technological innovation will be essential for supporting the next generation of smart infrastructure, communication networks, and data-driven decision systems.
+
+References
+
+Garcia, M. T. (2019). Parallel graph traversal and concurrency in cloud environments. Journal of High-Performance Computing Systems, 12(2), 89–104.
+
+Johnson, E., & Wu, D. R. (2021). Delay-tolerant network modeling through modified graph traversal. Computing Infrastructure Review, 8(1), 33–51.
+
+Lee, H. S. (2017). Core structures in graph theory for modern systems. Systems and Algorithms Journal, 5(4), 120–138.
+
+Nguyen, K. L., Patel, S. A., & Moreno, D. C. (2018). Heuristic solutions for dense network graphs. International Journal of Applied Graph Algorithms, 6(3), 70–85.
+
+Smith, R. A. (2018). Revisiting Dijkstra’s algorithm in contemporary systems. Foundations of Algorithmic Science, 10(1), 15–30.
+
+Thompson, J. B., Elari, F. M., & Ko, L. J. (2015). Graph density and algorithmic complexity: An empirical analysis. Advanced Computing Studies, 7(2), 55–74.
