@@ -343,6 +343,10 @@ class DocumentScannerGUI:
         tk.Button(self.root, text="Analyze Documents", command=self.analyze_documents,
                   bg="#e67e22", fg="white", width=25, font=("Helvetica", 12, "bold")).pack(pady=20)
 
+        tk.Button(self.root, text="Reset", command=self.reset_data,
+                  bg="#e74c3c", fg="white", width=25, font=("Helvetica", 12, "bold")).pack(pady=10)
+        
+
     def upload_file1(self):
         path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
         if path:
@@ -512,12 +516,20 @@ class DocumentScannerGUI:
         ax.set_ylim(0, 100)
         ax.set_ylabel('Percentage')
         ax.set_title('Document Similarity Index')
+        ax.set_yticks(range(0, 101, 5))
 
         canvas = FigureCanvasTkAgg(fig, master=graph_window)
         canvas.draw()
         canvas.get_tk_widget().pack(fill="both", expand=True)
         plt.close(fig)
 
+    # Reset stored data
+    def reset_data(self):
+            self.file1_content = None
+            self.file2_content = None
+            self.metadata = []
+            self.graph = {}
+            messagebox.showinfo("Reset Inputs", "Data has been cleared.")
 
 # ----------------- Launch the GUI ------------------
 
