@@ -17,8 +17,8 @@ def naive_search(text, pattern):
     return positions
 
 # Example input (hard-coded)
-text = "Hello World, this is Computer Science !!!"
-pattern = "Computer"
+#text = "Hello World, this is Computer Science !!!"
+#pattern = "Computer"
 
 # Output
-print("Naive Search Matching found at: ", naive_search(text, pattern))
+#print("Naive Search Matching found at: ", naive_search(text, pattern))
