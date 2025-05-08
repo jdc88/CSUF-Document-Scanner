@@ -1,4 +1,4 @@
-Author: kelly Johnson
+Author: Kelly Johnson
 Title: Advances in Scalable Network Algorithms
 Date: 2020
 

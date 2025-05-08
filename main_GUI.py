@@ -18,12 +18,13 @@ from Algorithms.bfs import bfs
 from Algorithms.dfs import dfs
 from Algorithms.radix import counting_sort
 from Algorithms.naive_search import naive_search
+from Algorithms.quick import quick_sort
 
 class DocumentScannerGUI:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Document Scanner")
-        self.root.geometry("700x600")
+        self.root.geometry("750x400")
         self.root.configure(bg="#1f2c33")
 
         self.file1_content = None
@@ -109,7 +110,8 @@ class DocumentScannerGUI:
         bfs_result = bfs(self.graph, "Document 1")
         dfs_result = dfs(self.graph, "Document 1")
 
-        sorted_metadata = sorted(self.metadata, key=lambda x: x['author'])
+        # Using Quick Sort to sort metadata by Author
+        sorted_metadata = quick_sort(self.metadata, key=lambda x: x['author'])
         prioritized_phrases = self.prioritize_phrases(matches)
 
         similarity_percent = self.calculate_similarity(matches)
@@ -197,11 +199,11 @@ class DocumentScannerGUI:
         text_area.insert(tk.END, "\n--- DFS Traversal ---\n")
         text_area.insert(tk.END, " -> ".join(dfs_result) + "\n")
 
-        text_area.insert(tk.END, "\n--- Sorted Metadata by Author ---\n")
+        text_area.insert(tk.END, "\n--- Quick Sorted Metadata by Author ---\n")
         for doc in sorted_metadata:
             text_area.insert(tk.END, f"Author: {doc['author']}, Title: {doc['title']}, Date: {doc['date']}\n")
 
-        text_area.insert(tk.END, "\n--- Prioritized Phrases ---\n")
+        text_area.insert(tk.END, "\n--- 5 Longest Phrases Matched ---\n")
         for phrase in prioritized_phrases:
             text_area.insert(tk.END, f"- {phrase}\n")
 
@@ -220,7 +222,7 @@ class DocumentScannerGUI:
         return G
 
     def visualize_graph(self, G):
-        title = f"Citation Graph\n {self.file1_name} and {self.file2_name}" # For dynamic display of which files are in graph
+        title = f"Citation Graph\n {self.file1_name} and {self.file2_name}" # For dynamic display of which files are used for citation graph
         graph_window = tk.Toplevel()
         graph_window.title(title)
         graph_window.geometry("800x600")
@@ -238,7 +240,8 @@ class DocumentScannerGUI:
 
     def visualize_similarity(self, similarity_percent):
         graph_window = tk.Toplevel()
-        graph_window.title("Similarity Percentage")
+        bar_title = f"Comparison Between\n {self.file1_name} and {self.file2_name}" # For dynamic display of which files are used for bar graph
+        graph_window.title(bar_title)
         graph_window.geometry("500x400")
 
         fig, ax = plt.subplots(figsize=(5, 4))
@@ -247,8 +250,15 @@ class DocumentScannerGUI:
         ax.bar(categories, values, color=['#27ae60', '#c0392b'])
         ax.set_ylim(0, 100)
         ax.set_ylabel('Percentage')
-        ax.set_title('Document Similarity Index')
+        ax.set_title(bar_title)
         ax.set_yticks(range(0, 101, 5))
+
+        # This displays percentage inside the bar
+        bars = ax.bar(categories, values, color=['#27ae60', '#c0392b'])
+        
+        for bar, value in zip(bars, values):
+            ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() - 5, f"{value:.2f}%", 
+                ha='center', va='bottom', color='blue', fontweight='bold')
 
         canvas = FigureCanvasTkAgg(fig, master=graph_window)
         canvas.draw()
