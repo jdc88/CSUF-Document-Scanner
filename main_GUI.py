@@ -132,6 +132,7 @@ class DocumentScannerGUI:
         # Visualize similarity
         self.visualize_similarity(similarity_percent)
 
+    # Using Rabin Karp Algorithm
     def find_matches(self):
         matches = []
         words1 = self.file1_content.split()
@@ -219,7 +220,7 @@ class DocumentScannerGUI:
         return G
 
     def visualize_graph(self, G):
-        title = f"Citation Graph of\n {self.file1_name} and {self.file2_name}" # For dynamic display of which files are in graph
+        title = f"Citation Graph\n {self.file1_name} and {self.file2_name}" # For dynamic display of which files are in graph
         graph_window = tk.Toplevel()
         graph_window.title(title)
         graph_window.geometry("800x600")
@@ -287,11 +288,16 @@ class DocumentScannerGUI:
     # Reset input documents and saved metadata
     def reset_data(self):
         self.file1_content = None
-        self.file2_content = None
         self.file1_name = "No Document Loaded"
+        self.file1_label.config(text=self.file1_name)
+
+        self.file2_content = None
         self.file2_name = "No Document Loaded"
+        self.file2_label.config(text=self.file2_name)
+        
         self.metadata = []
         self.graph = {}
+
         messagebox.showinfo("Reset Inputs", "Data has been cleared.")
 
 # ----------------- Launch the GUI ---------------------

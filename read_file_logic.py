@@ -28,6 +28,7 @@ def read_file(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
         return content
+    
     except FileNotFoundError:
         raise FileNotFoundError(f"The file {file_path} was not found.")
     except IOError as e:
