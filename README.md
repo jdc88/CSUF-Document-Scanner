@@ -4,10 +4,7 @@ This project is a GUI-based tool designed to analyze student documents, detect p
 ## How to Run
 
 1. Ensure you have Python installed.
-2. Install required libraries:
-   ```
-   pip install matplotlib networkx
-   ```
+2. Install required libraries
 3. Run the application:
    ```
    python main_GUI.py
