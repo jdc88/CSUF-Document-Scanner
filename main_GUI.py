@@ -225,7 +225,7 @@ class DocumentScannerGUI:
         title = f"Citation Graph\n {self.file1_name} and {self.file2_name}" # For dynamic display of which files are used for citation graph
         graph_window = tk.Toplevel()
         graph_window.title(title)
-        graph_window.geometry("800x600")
+        graph_window.geometry("900x600")
         graph_window.configure(bg="#ffffff")
 
         fig, ax = plt.subplots(figsize=(8, 6))
